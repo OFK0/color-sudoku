@@ -1,9 +1,9 @@
+import javax.sound.sampled.Line;
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 public class Main {
@@ -20,7 +20,7 @@ public class Main {
 
         JFrame colorFrame = new JFrame("9X9 COLOR SUDOKU GAME - OMER FARUK KUCUK");
         colorFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        colorFrame.setSize(100,900);
+        colorFrame.setSize(200,700);
         colorFrame.setLayout(new GridLayout(9,1));
         colorFrame.setVisible(true);
         for (int c = 1; c <= 9; c++) {
@@ -59,15 +59,25 @@ public class Main {
                 JButton buttonContext = new JButton("");
                 buttonContext.setBackground(SudokuUtils.getColor(sudoku.grid[y][x]));
                 buttonContext.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                if (sudoku.grid[y][x] != 0) {
+                    buttonContext.setEnabled(false);
+                }
                 int finalNum = sudoku.grid[y][x];
                 int rowIndex = y;
                 int colIndex = x;
                 buttonContext.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                        if (buttonContext.getBackground() != Color.WHITE && buttonContext.isEnabled()) {
+                            buttonContext.setBackground(Color.WHITE);
+                            buttonContext.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                            sudoku.grid[rowIndex][colIndex] = SudokuUtils.getColorNumber(Color.WHITE);
+                            return;
+                        }
                         if (buttonContext.getBackground() == Color.WHITE) {
                             if (sudoku.verify(sudoku.grid, SudokuUtils.getColorNumber(sudoku.handColor), rowIndex, colIndex)) {
                                 buttonContext.setBackground(sudoku.handColor);
+                                buttonContext.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 5));
                                 sudoku.grid[rowIndex][colIndex] = SudokuUtils.getColorNumber(sudoku.handColor);
                                 if (sudoku.isGameEnd()) {
                                     JOptionPane.showMessageDialog(frame, "It is okay, congratulations!");

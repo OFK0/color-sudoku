@@ -3,7 +3,7 @@ import java.awt.*;
 public class Sudoku {
 
     int[][] grid = new int[9][9];
-    static int[] values = { 0,0,0,0,0,0,0,0,0,0,0,2,3,1,4,6,7,5,8,9 };
+    static int[] values = { 0,0,0,0,0,0,0,2,3,1,4,6,7,5,8,9 };
 
     Color handColor = Color.CYAN;
 
