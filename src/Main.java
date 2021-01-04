@@ -73,6 +73,7 @@ public class Main {
                                     JOptionPane.showMessageDialog(frame, "It is okay, congratulations!");
                                     frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
                                     colorFrame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+                                    System.exit(0);
                                 }
                             }
                         }
